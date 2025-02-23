@@ -1,6 +1,7 @@
 package mysql_utils
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/dralos/bookstore_users-api/utils/errors"
@@ -24,5 +25,5 @@ func ParseError(err error) *errors.RestErr {
 	case 1062:
 		return errors.NewBadRequestError("duplicated data")
 	}
-	return errors.NewInternalServerError("error processing request")
+	return errors.NewInternalServerError(fmt.Sprintf("error processing request %v", sqlErr))
 }
